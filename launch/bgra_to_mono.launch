@@ -1,0 +1,12 @@
+<launch>
+    <!-- Launch the bgra_to_mono_node -->
+    <node name="bgra_to_mono_node" pkg="convert_rgb_to_mono_image" type="bgra_to_mono_node" output="screen">
+        <!-- Remap the input topics -->
+        <remap from="left_camera_input_topic" to="/zedm/zed_node/left/image_rect_color" />
+        <remap from="right_camera_input_topic" to="/zedm/zed_node/right/image_rect_color" />
+
+        <!-- Remap the output topics -->
+        <remap from="left_camera_output_topic" to="/zedm/zed_node/left/image_rect_gray" />
+        <remap from="right_camera_output_topic" to="/zedm/zed_node/right/image_rect_gray" />
+    </node>
+</launch>
