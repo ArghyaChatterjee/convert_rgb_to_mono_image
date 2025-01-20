@@ -1,4 +1,4 @@
-# convert_rgb_to_mono_image
+# Convert RGB to Monocular Image
 
 A ros package to convert rgb/bgra8 image to monocular image. 
 
