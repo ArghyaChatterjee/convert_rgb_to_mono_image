@@ -20,47 +20,86 @@ source devel/setup.bash
 ```
 
 # Launch the conversion node
-Modify the `bgra_to_mono.launch` file according to the `topics` and `frame name` that you want to publish the monocular image data. Then launch the node like this:
+Modify the `bgra_to_mono.launch` file according to the `topics` and `frame name` that you want to publish the monocular image data of type `mono8` from color image of type `bgra8`. Then launch the node like this:
 ```bash
 roslaunch convert_bgra_to_mono_image bgra_to_mono.launch
 ```
-There is a separate launch file for zed camera. If you want to test it, launch it like this:
+There is another launch file for zed camera for converting `rgb8` type color image to `mono8` type monocular image. If you want to test it, launch it like this:
 ```bash
-roslaunch tf_imu_to_base zedm_imu_transform.launch
+roslaunch convert_rgb_to_mono_image rgb_to_mono.launch
 ```
 <div align="center">
-   <img src="media/zed_imu_frame_transformed.gif"/>
+   <img src="media/zed_convert_rgb_to_monocular_image.gif"/>
 </div>
 
-Input Left camera rgb topic echo:
+## For bgra8 to mono8 conversion: 
+
+Input Right camera rgb topic echo:
 ```
-$ rostopic echo /zed2/zed_node/left/image_rect_color
+$ rostopic echo /zedm/zed_node/right/image_rect_color
 header: 
-  seq: 4
+  seq: 0
   stamp: 
-    secs: 1735278948
-    nsecs: 606446465
-  frame_id: "zed2_left_camera_optical_frame"
-height: 360
-width: 640
+    secs: 1729878717
+    nsecs: 392199039
+  frame_id: "zedm_right_camera_optical_frame"
+height: 1080
+width: 1920
 encoding: "bgra8"
 is_bigendian: 0
-step: 2560
-data: [61, 34, 41, 255, 61, 36, 43, 255, 63, 37, 43, 255, 64, 40, 43, 255...]
+step: 7680
+data: [181, 204, 212, 255, 181, ..]
 ```
-Output Left camera mono topic echo:
+
+Output Right camera mono topic echo:
 ```
-$ rostopic echo /zed2/zed_node/left/image_rect_gray
+$ rostopic echo /zedm/zed_node/right/image_rect_gray
 header: 
-  seq: 4
+  seq: 1044
   stamp: 
-    secs: 1735278948
-    nsecs: 606446465
-  frame_id: "zed2_left_camera_optical_frame"
-height: 360
-width: 640
+    secs: 1729878741
+    nsecs: 844533920
+  frame_id: "zedm_right_camera_optical_frame"
+height: 1080
+width: 1920
 encoding: "mono8"
 is_bigendian: 0
-step: 2560
-data: [61, 34, 41, 255, 61, 36, 43, 255, 63, 37, 43, 255, 64, 40, 43, 255...]
+step: 1920
+data: [247, 247, 247, 247, 247, ..]
+```
+
+## For rgb8 to mono8 conversion:
+
+Input Right camera rgb topic echo:
+```
+$ rostopic echo /zedm/zed_node/right/image_rect_color
+header: 
+  seq: 0
+  stamp: 
+    secs: 1729878717
+    nsecs: 392199039
+  frame_id: "zedm_right_camera_optical_frame"
+height: 1080
+width: 1920
+encoding: "rgb8"
+is_bigendian: 0
+step: 7680
+data: [181, 204, 212, 255, 181, ..]
+```
+
+Output Right camera mono topic echo:
+```
+$ rostopic echo /zedm/zed_node/right/image_rect_gray
+header: 
+  seq: 1044
+  stamp: 
+    secs: 1729878741
+    nsecs: 844533920
+  frame_id: "zedm_right_camera_optical_frame"
+height: 1080
+width: 1920
+encoding: "mono8"
+is_bigendian: 0
+step: 1920
+data: [247, 247, 247, 247, 247, ..]
 ```
