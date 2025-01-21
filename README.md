@@ -1,6 +1,6 @@
 # Convert RGB to Monocular Image
 
-A ros package to convert rgb/bgra8 image to monocular image. 
+A ros package to convert rgb/bgra8 image to monocular image. This is a ros1 package.
 
 # Requirements
 This repository is tested with Ubuntu 20.04 and ROS noetic.
